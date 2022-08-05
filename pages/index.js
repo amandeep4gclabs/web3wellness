@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -72,24 +73,27 @@ export default function Home() {
         </a>
       </footer> */}
 
-      {isLoading && <>
-    <div className="preloader-area">
-      <div className='coin'>
-        <div className='front jump'>
-          <div className='star'></div>
-          <span className='currency'>
-            <i className="las la-coins"></i>
-          </span>
-          <div className='shapes'>
-            <div className='shape_l'></div>
-            <div className='shape_r'></div>
-            <span className='top'>Stay Fit</span>
-            <span className='bottom'>Stay Fit</span>
+    {isLoading && 
+      <>
+      <div className="preloader-area">
+        <div className='coin'>
+          <div className='front jump'>
+            <div className='star'></div>
+            <span className='currency'>
+              <i className="las la-coins"></i>
+            </span>
+            <div className='shapes'>
+              <div className='shape_l'></div>
+              <div className='shape_r'></div>
+              <span className='top'>Stay Fit</span>
+              <span className='bottom'>Stay Fit</span>
+            </div>
           </div>
+          <div className='shadow'></div>
         </div>
-        <div className='shadow'></div>
       </div>
-    </div></>}
+      </>
+    }
     <header className="header-section">
       <div className="header">
         <div className="header-top-area">
@@ -98,13 +102,16 @@ export default function Home() {
               <div className="header-content d-flex flex-wrap justify-content-between align-items-center">
                 <div className="header-right-info">
                   <span className="first-info">
-                    <a href="tel:+ 001 2166 5645">
-                      <i className="fas fa-phone"></i>+ 001 2166 5645 </a>
+                     <Link href="tel:+ 001 2166 5645">
+                        <a>
+                          <i className="fas fa-phone"></i>{`+ 001 2166 5645`}
+                        </a>
+                     </Link> 
                   </span>
                 </div>
                 <div className="header-right-info">
                   <div className="header-action">
-                    <a href="login.html" className="cmn-btn-active">Login</a>
+                    <Link href="#"><a className="cmn-btn-active">Login</a></Link>
                   </div>
                 </div>
               </div>
@@ -115,22 +122,24 @@ export default function Home() {
           <div className="container">
             <div className="header-menu-content">
               <nav className="navbar navbar-expand-lg p-0">
-                <a className="site-logo site-title" href="index.html">
+                <Link href="/">
+                  <a className="site-logo site-title">
                   <Image src="https://web3wellness.fit/assets/images/logoIcon/logo.png" alt="site-logo" layout="fill" objectFit="contain" />
-                </a>
+                  </a>
+                </Link>
                 <button className="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="fas fa-bars"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav main-menu ml-auto mr-auto">
                     <li>
-                      <a href="index.html" className="active">Home</a>
+                      <Link href="/"><a className="active">Home</a></Link>
                     </li>
                     <li>
-                      <a href="home/privacy.html" className="active">Privacy Policy</a>
+                      <Link href="/privacy"><a className="active">Privacy Policy</a></Link>
                     </li>
                     <li>
-                      <a href="home/terms-condition.html" className="active">Terms & Conditions</a>
+                      <Link href="/terms-condition"><a className="active">Terms & Conditions</a></Link>
                     </li>
                   </ul>
                 </div>
@@ -148,9 +157,9 @@ export default function Home() {
               <h2 className="title">we reward you to stay healthy</h2>
               <p>You will get a reward in the form of our crypto token JW. We will also introduce workout plans, and diet plans later in paid monthly plans. This is a pure fitness app that will sell its memberships in JW tokens and give rewards to its users in the form of JW tokens.</p>
               <div className="banner-btn justify-content-center">
-                <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;access_type=offline&amp;client_id=870456902994-ok6pbosd1pt83qav2jc1lo7fkd6b7kd6.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fwww.web3wellness.fit%2Fauth%2Fgoogle%2Fcallback&amp;state&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffitness.activity.read%20profile%20email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcontacts.other.readonly&amp;prompt=select_account%20consent">
+                {/* <Link href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;access_type=offline&amp;client_id=870456902994-ok6pbosd1pt83qav2jc1lo7fkd6b7kd6.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fwww.web3wellness.fit%2Fauth%2Fgoogle%2Fcallback&amp;state&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffitness.activity.read%20profile%20email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcontacts.other.readonly&amp;prompt=select_account%20consent">
                   <Image src="../developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" />
-                </a>
+                </Link> */}
               </div>
             </div>
           </div>
