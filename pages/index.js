@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSession, signIn, signOut } from "next-auth/react"
+
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +8,8 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-
+  const { data: session } = useSession()
+  
   useEffect(() => {
     setTimeout(() => {  setIsLoading(false) }, 500);
   }, [])
@@ -112,6 +115,15 @@ export default function Home() {
                 <div className="header-right-info">
                   <div className="header-action">
                     <Link href="#"><a className="cmn-btn-active">Login</a></Link>
+                    {session ?
+                      <>
+                        Signed in as {session.user.email} <br />
+                        <button onClick={() => signOut()}>Sign out</button>
+                      </> : 
+                      <>
+                        Not signed in <br />
+                        <button onClick={() => signIn()}>Sign in</button>
+                      </>}
                   </div>
                 </div>
               </div>
