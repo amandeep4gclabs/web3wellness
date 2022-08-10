@@ -3,28 +3,34 @@ import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
     providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            authorization: {
-                params: {
-                  prompt: "consent",
-                  access_type: "offline",
-                  response_type: "code"
-                }
+      GoogleProvider({
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
+        authorization: {
+          params: {
+            prompt: "consent",
+            access_type: "offline",
+            response_type: "code"
             }
-        })
+        }
+      }),
     ],
     jwt: {
-        encryption: true
+      encryption: true
     },
     secret: process.env.JWSECRET,
     callbacks: {
-        async signIn({ account, profile }) {
-          if (account.provider === "google") {
-            return profile.email_verified && profile.email.endsWith("@gmail.com")
-          }
-          return true // Do different verification for other providers that don't have `email_verified`
-        },
-    }
+      async jwt(token, user, account, profile, isNewUser) {
+        if (account?.accessToken) {
+          token.accessToken = account.accessToken;
+        }
+        return token;
+      },
+      redirect: async (url, baseUrl) => {
+        if (url === '/profile') {
+          return Promise.resolve('/');
+        }
+        return Promise.resolve('/');
+      },
+    },
 });
