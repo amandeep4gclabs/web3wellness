@@ -6,31 +6,16 @@ export default NextAuth({
       GoogleProvider({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
-        authorization: {
-          params: {
-            prompt: "consent",
-            access_type: "offline",
-            response_type: "code"
-            }
-        }
       }),
     ],
-    jwt: {
-      encryption: true
+    theme: {
+      colorScheme: "light",
     },
-    secret: process.env.JWSECRET,
+    secret: '2f5d12fa717f45494ea60fb7c4adb895',
     callbacks: {
-      async jwt(token, user, account, profile, isNewUser) {
-        if (account?.accessToken) {
-          token.accessToken = account.accessToken;
-        }
-        return token;
-      },
-      redirect: async (url, baseUrl) => {
-        if (url === '/profile') {
-          return Promise.resolve('/');
-        }
-        return Promise.resolve('/');
+      async jwt({ token }) {
+        token.userRole = "admin"
+        return token
       },
     },
 });
